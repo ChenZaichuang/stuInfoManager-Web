@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+<h1><%= title %></h1>
+<%= printinfo %>
+<form method="get" action="/addStudent">
+    <input type="submit" value="添加学生"/>
+</form>
+<form method="get" action="/printStudentScore">
+    <input type="submit" value="生成成绩单"/>
+</form>
+<form method="get" action="/quit">
+    <input type="submit" value="退出"/>
+</form>
+</body>
+</html>
