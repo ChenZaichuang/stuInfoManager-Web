@@ -47,14 +47,14 @@ class stuInfo{
             return '';
         }
         var students = returnPack.studentArray;
-        var printScoreString = '成绩单\n姓名|数学|语文|英语|编程|平均分|总分|' +
-                                '\n========================';
+        var printScoreString = '<p>成绩单<br>姓名|数学|语文|英语|编程|平均分|总分|' +
+                                '<br>========================';
         for(var studentObj of students){
-            printScoreString += '\n' + studentObj.printMyScore();
+            printScoreString += studentObj.printMyScore();
         }
-        printScoreString += '\n========================' +
-        `\n全班总分平均分：${this.getClassAveScore(students)}` +
-        `\n全班总分中位数：${this.getClassMedianScore(students)}`;
+        printScoreString += '<br>========================' +
+        `<br>全班总分平均分：${this.getClassAveScore(students)}` +
+        `<br>全班总分中位数：${this.getClassMedianScore(students)}</p>`;
 
         return printScoreString;
     }

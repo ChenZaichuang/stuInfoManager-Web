@@ -43,7 +43,7 @@ class Student{
         }
     }
     printMyScore(){
-        return `${this.name}|${this.subjectScore.math}|${this.subjectScore.chinese}|${this.subjectScore.English}|${this.subjectScore.programming}|${this.subjectScore.averageScore}|${this.subjectScore.scoreSum}`;
+        return `<br>${this.name}|${this.subjectScore.math}|${this.subjectScore.chinese}|${this.subjectScore.English}|${this.subjectScore.programming}|${this.subjectScore.averageScore}|${this.subjectScore.scoreSum}`;
     }
 }
 module.exports.Student = Student;

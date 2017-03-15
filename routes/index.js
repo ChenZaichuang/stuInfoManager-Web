@@ -19,7 +19,8 @@ exports.index1=function(req,res) {
     res.render("index1", {title:"主页1",printinfo:''});
 }
 exports.addStudent=function(req,res){
-    res.render("addStudent",{title:"添加学生信息",printinfo:''});
+    var newNode = node1;
+    res.render("addStudent",{title:"添加学生信息",printinfo:newNode.printInfo.mainInterfaceMessage});
 }
 exports.checkStudent=function(req,res){  //这里调用结点
     var newNode = node1;
@@ -48,7 +49,8 @@ exports.checkStudent=function(req,res){  //这里调用结点
     }
 }
 exports.printStudentScore=function(req,res){
-    res.render("printStudentScore",{title:"打印学生成绩单",printinfo:''});
+    var newNode = node2;
+    res.render("printStudentScore",{title:"打印学生成绩单",printinfo:newNode.printInfo.mainInterfaceMessage});
 }
 exports.checkNumber=function(req,res){
     var newNode = node2;
@@ -69,9 +71,9 @@ exports.checkNumber=function(req,res){
         // input.prompt();
     }else{
         console.log('checkNumber false');
-        res.render("index1", {title:"主页1",printinfo:result.printInfo});
+        res.render("printStudentScore", {title:"打印学生成绩单",printinfo:result.printInfo});
     }
 }
 exports.quit=function(req,res){
-    res.render("quit",{title:"打印学生成绩单"});
+    res.render("quit",{title:"已退出"});
 }

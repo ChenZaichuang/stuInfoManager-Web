@@ -3,8 +3,8 @@ const menuNode = require("./menuNode.js").menuNode;
 class menuNodeHead extends menuNode{
     constructor(){
         super([] , [] , {
-            mainInterfaceMessage : '1. 添加学生\n2. 生成成绩单\n请输入你的选择（1～2）：\n',
-            inputError : '\n输入错误，请重新输入：\n'
+            mainInterfaceMessage : '<p>1. 添加学生<br>2. 生成成绩单<br>请输入你的选择（1～2）：<br></p>',
+            inputError : '<p>输入错误，请重新输入：<br></p>'
         });
     }
     programOfMenuNode(stuInfoBase , inputString){
