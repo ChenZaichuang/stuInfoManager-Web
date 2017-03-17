@@ -14,18 +14,18 @@ class Student{
         this.subjectScore = subjectScore;
     }
     calculateScoreSum(){
-        this.subjectScore.scoreSum = this.subjectScore.math+
+        this.subjectScore.scoreSum = Math.round((this.subjectScore.math+
                                         this.subjectScore.chinese +
                                         this.subjectScore.English +
-                                        this.subjectScore.programming;
+                                        this.subjectScore.programming)*10)/10;
     }
     calculateAveagerScore(){
-        this.subjectScore.averageScore = this.subjectScore.scoreSum/4;
+        this.subjectScore.averageScore = Math.round((this.subjectScore.scoreSum/4)*10)/10;
     }
     checkStuInfoString(StuInfoString){
         var regularExpression = /^([\u4e00-\u9fa5]+),(\d+),([\u4e00-\u9fa5]+),(\d+),math:(\d+),chinese:(\d+),English:(\d+),programming:(\d+)$/;
         var result = StuInfoString.match(regularExpression);
-        console.log('here1');
+
         if(result != null){
             this.name = result[1];
             this.number = Number(result[2]);
@@ -37,6 +37,8 @@ class Student{
             this.subjectScore.programming = Number(result[8]);
             this.calculateScoreSum();
             this.calculateAveagerScore();
+            console.log(this.subjectScore.scoreSum);
+            console.log(this.subjectScore.averageScore);
             return true;
         }else{
             return false;
@@ -44,6 +46,9 @@ class Student{
     }
     printMyScore(){
         return `<br>${this.name}|${this.subjectScore.math}|${this.subjectScore.chinese}|${this.subjectScore.English}|${this.subjectScore.programming}|${this.subjectScore.averageScore}|${this.subjectScore.scoreSum}`;
+    }
+    printFullInfo(){
+        return `<br>${this.name}|${this.number}|${this.nation}|${this.klass}|${this.subjectScore.math}|${this.subjectScore.chinese}|${this.subjectScore.English}|${this.subjectScore.programming}`;
     }
 }
 module.exports.Student = Student;

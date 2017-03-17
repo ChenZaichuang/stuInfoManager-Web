@@ -2,15 +2,23 @@
 <html>
   <head>
     <title><%= title %></title>
+    <script src="../jquery.min.js"></script>
+
+    <script src="../app/indexScript.js"></script>
 
   </head>
   <body>
     <h1><%= title %></h1>
-    <form method="get" action="addStudent">
-      <input type="submit" value="添加学生"/>
-    </form>
-    <form method="get" action="printStudentScore">
-      <input type="submit" value="生成成绩单"/>
-    </form>
+    <div id="showinfo"></div>
+    <button id="addStudent">添加学生</button>
+    <button id="printStudentScore">生成成绩单</button>
+    <button id="removeStudentScore">删除学生信息</button>
+    <button id="reviseStudentScore">修改学生信息</button>
+    <!--<form method="get" action="addStudent">-->
+      <!--<input type="submit" value="添加学生"/>-->
+    <!--</form>-->
+    <!--<form method="get" action="printStudentScore">-->
+      <!--<input type="submit" value="生成成绩单"/>-->
+    <!--</form>-->
   </body>
 </html>

@@ -14,18 +14,15 @@ class menuNode1 extends menuNode{
         var returnPack = {};
 
         if(student.checkStuInfoString(inputString) == true){
-            console.log('here2');
             stuInfoBase.addStudent(student);
             returnPack.result = true;
             returnPack.node = this.farther[1];
             returnPack.printInfo = `<p>学生${student.name}的成绩被添加<br></p>`;
         }else{
-            console.log('here3');
             returnPack.result = false;
             returnPack.node = null;
             returnPack.printInfo = this.printInfo.inputError;
         }
-        console.log('here4');
         return returnPack;
     }
 

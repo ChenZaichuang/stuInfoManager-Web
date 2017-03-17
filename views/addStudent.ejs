@@ -2,33 +2,18 @@
 <html>
 <head>
     <title><%= title %></title>
-    <!--<script type="text/javascript" src="../app/student.js"></script>-->
-    <!--<script type="text/javascript" src="../app/stuInfo.js"></script>-->
-    <!--<script type="text/javascript" src="../app/menuManager.js"></script>-->
-    <!--<script type="text/javascript" src="../app/menuNode.js"></script>-->
-    <!--<script type="text/javascript" src="../app/menuNodeHead.js"></script>-->
-    <!--<script type="text/javascript" src="../app/menuNodeHead1.js"></script>-->
-    <!--<script type="text/javascript" src="../app/menuNode1.js"></script>-->
-    <!--<script type="text/javascript" src="../app/menuNode2.js"></script>-->
-    <!--<script type="text/javascript">-->
-        <!--function stuInfoOnChange(x)-->
-        <!--{-->
-<!--//            var stuInfoString=document.getElementById(x).value;-->
-<!--//            var student = new Student();-->
-<!--//            student.checkStuInfoString(stuInfoString);-->
-            <!--alert('qwer');-->
-        <!--}-->
-    <!--</script>-->
+    <script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
 
+    <script src="./bundle.js"></script>
 </head>
 
 
 <body>
 <h1><%= title %></h1>
 <form method="get" action="/checkStudent" >
-    要添加的学生信息: <input type="text" name="stuinfo" id="stuInfo")"><br/>
+    要添加的学生信息: <input type="text" name="stuinfo" id="stuInfo"><br/>
     <%- printinfo %>
-    <input type="submit" value="确认添加"/>
+    <input type="submit" id="Submit" value="确认添加" disabled=true/>
 </form>
 </body>
 </html>

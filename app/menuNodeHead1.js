@@ -17,7 +17,6 @@ class menuNodeHead1 extends menuNode{
             returnPack.node = (result === '3') ? null : this.children[Number(result)-1];
             returnPack.printInfo = '';
         }else{
-            alert(this.printInfo.inputError);
             returnPack.result = false;
             returnPack.node = null;
             returnPack.printInfo = this.printInfo.inputError;

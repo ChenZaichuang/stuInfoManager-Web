@@ -17,7 +17,7 @@ class stuInfo{
         var regularExpressionForCheck = /^\d+(,\d+)*$/;
         var regularExpressionForExtract = /(\d+)/g;
         var resultPack = {};
-        console.log('StuNumberString='+StuNumberString);
+
         if(regularExpressionForCheck.test(StuNumberString)){
             var result = StuNumberString.match(regularExpressionForExtract);
             var studentArray = [];
@@ -42,7 +42,6 @@ class stuInfo{
     }
     printStuScore(StuNumberString){
         var returnPack = this.checkStuNumberString(StuNumberString);
-        console.log(returnPack);
         if(returnPack.result == false){
             return '';
         }
@@ -53,29 +52,55 @@ class stuInfo{
             printScoreString += studentObj.printMyScore();
         }
         printScoreString += '<br>========================' +
-        `<br>全班总分平均分：${this.getClassAveScore(students)}` +
-        `<br>全班总分中位数：${this.getClassMedianScore(students)}</p>`;
+        `<br>全班总分平均分：${(this.getClassAveScore(students)).toFixed(1)}` +
+        `<br>全班总分中位数：${(this.getClassMedianScore(students)).toFixed(1)}</p>`;
 
         return printScoreString;
+    }
+    findStudent(StuNumberString){
+        for(var i = 0; i < this.students.length; i++){
+            if(Number(StuNumberString) === this.students[i].number){
+                return this.students[i];
+            }
+        }
+        return null;
+    }
+    deleteStudent(StuNumberString){
+        var returnPack = this.checkStuNumberString(StuNumberString);
+        if(returnPack.result == false){
+            return false;
+        }
+        var students = returnPack.studentArray;
+        for(var studentObj of students){
+            for(var i = 0; i < this.students.length; i++){
+                if(studentObj.number === this.students[i].number){
+                    this.students.splice(i , 1);
+                }
+            }
+        }
+        return true;
     }
     getClassAveScore(students){
         var sum = 0;
         for(var student of students){
             sum += student.subjectScore.scoreSum;
         }
-        return (sum == 0) ? sum : sum/students.length;
+        console.log(sum);
+        console.log(sum/students.length);
+        return (students.length == 0) ? 0 : Math.round(sum/students.length*10)/10;
     }
     getClassMedianScore(students){
         if(students.length == 0){
-            return 0;
+            return 0.0;
         }
         var scoreSumArray = [];
         for(var student of this.students){
             scoreSumArray.push(student.subjectScore.scoreSum);
         }
         scoreSumArray.sort();
-        return scoreSumArray[Math.floor((scoreSumArray.length-1)/2)];
+        return Math.round(scoreSumArray[Math.floor((scoreSumArray.length-1)/2)]*10)/10;
     }
+
 }
 
 module.exports.stuInfo = stuInfo;
