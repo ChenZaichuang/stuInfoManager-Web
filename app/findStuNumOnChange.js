@@ -2,8 +2,9 @@ function findStuNumOnChange()
 {
     $(document).ready(function(){
         $("#stuNumber").keyup(function(){
-            var regularExpressionForCheck = /^\d*$/;
+            var regularExpressionForCheck = /^\d+$/;
             var StuNumberString = $("#stuNumber").val();
+            // alert(StuNumberString);
             if(regularExpressionForCheck.test(StuNumberString)){
                 $("#Submit").attr("disabled",false);
             }
