@@ -52,8 +52,8 @@ class stuInfo{
             printScoreString += studentObj.printMyScore();
         }
         printScoreString += '<br>========================' +
-        `<br>全班总分平均分：${(this.getClassAveScore(students)).toFixed(1)}` +
-        `<br>全班总分中位数：${(this.getClassMedianScore(students)).toFixed(1)}</p>`;
+        `<br>全班总分平均分：${this.getClassAveScore(students)}` +
+        `<br>全班总分中位数：${this.getClassMedianScore(students)}</p>`;
 
         return printScoreString;
     }
@@ -64,6 +64,21 @@ class stuInfo{
             }
         }
         return null;
+    }
+    reviseStuInfo(stuInfoString){
+        var student = new Student();
+        var returnPack = {};
+        student.checkStuInfoString(stuInfoString);
+        console.log(student);
+        for(var i = 0; i < this.students.length; i++){
+            if(student.number === this.students[i].number){
+                this.students.splice(i , 1);
+            }
+        }
+        this.students.push(student);
+        returnPack.result = true;
+        returnPack.printInfo = `<p>学号为${student.number}的学生信息已被成功修改</p>`;
+        return returnPack;
     }
     deleteStudent(StuNumberString){
         var returnPack = this.checkStuNumberString(StuNumberString);

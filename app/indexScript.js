@@ -44,6 +44,7 @@ $( function() {
 
     $('#reviseStudentScore').click( function() {
         var data = {};
+        // alert('here');
         $.get( "findStudent", data, success4, "json" );
     } );
 

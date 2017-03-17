@@ -24,10 +24,20 @@ $( function() {
     function success( siteData ) {
         $("body").html(siteData.content);
         $("#showinfo").html(siteData.showInfo);
-        jQuery.getScript("../app/indexScript.js")//各种监听
-            .done(function() {
-            })
-            .fail(function() {
-            });
+        if(siteData.result === true){
+            jQuery.getScript("../app/newStuInfoOnChange.js")//各种监听
+                .done(function() {
+                    // alert('newStuInfoOnChange.js');
+                })
+                .fail(function() {
+                });
+        }else{
+            jQuery.getScript("../app/findStuNumOnChange.js")//各种监听
+                .done(function() {
+                    // alert('findStuNumOnChange.js');
+                })
+                .fail(function() {
+                });
+        }
     }
 } );

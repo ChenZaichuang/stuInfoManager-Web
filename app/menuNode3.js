@@ -11,11 +11,10 @@ class menuNode3 extends menuNode{
     }
     programOfMenuNode(stuInfoBase , inputString){
         var returnPack = {};
-        var string = '';
-        if((string = stuInfoBase.deleteStudent(inputString))){
+        if(stuInfoBase.deleteStudent(inputString)){
             returnPack.result = true;
             returnPack.node = this.farther[1];
-            returnPack.printInfo = string;
+            returnPack.printInfo = `学号为${inputString}的学生已被删除！`;
         }else{
             returnPack.result = false;
             returnPack.node = null;

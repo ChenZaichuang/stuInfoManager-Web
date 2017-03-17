@@ -13,7 +13,7 @@ class menuNode4 extends menuNode{
 
     programOfMenuNode(stuInfoBase , inputString){
         var returnPack = {};
-        var student = stuInfoBase.findStudent(StuNumberString);
+        var student = stuInfoBase.findStudent(inputString);
 
         returnPack.result = (student === null) ? false : true;
         returnPack.printInfo = (student === null) ? this.printInfo.findError : '';

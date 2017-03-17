@@ -24,10 +24,21 @@ $( function() {
     function success( siteData ) {
         $("body").html(siteData.content);
         $("#showinfo").html(siteData.showInfo);
-        jQuery.getScript("../app/indexScript.js")
-            .done(function() {
-            })
-            .fail(function() {
-            });
+        if(siteData.result === true){
+            // alert('true');
+            jQuery.getScript("../app/indexScript.js")
+                .done(function() {
+                })
+                .fail(function() {
+                });
+        }else{
+            // alert('false');
+            jQuery.getScript("../app/delStuInfoOnChange.js")
+                .done(function() {
+                })
+                .fail(function() {
+                });
+        }
+
     }
 } );

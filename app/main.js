@@ -24,8 +24,8 @@ function mainFunc(){
     menuManagerObj.setFarther(nodeHead1 , node1);
     menuManagerObj.setFarther(nodeHead1 , node2);
 
-    console.log(node1);
-    console.log(stuInfoBase);
+    // console.log(node1);
+    // console.log(stuInfoBase);
 
     menuManagerObj.runMenuNode(nodeHead , stuInfoBase);
 }

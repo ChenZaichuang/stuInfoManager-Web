@@ -49,6 +49,9 @@ app.get('/printStudentScore',routes.printStudentScore);
 app.get('/checkNumber',routes.checkNumber);
 app.get('/delStuInfo',routes.delStuInfo);
 app.get('/delStudent',routes.delStudent);
+app.get('/findStudent',routes.findStudent);
+app.get('/newStuInfo',routes.newStuInfo);
+app.get('/reviseStudent',routes.reviseStudent);
 app.get('/quit',routes.quit);
 
 app.listen('8080');

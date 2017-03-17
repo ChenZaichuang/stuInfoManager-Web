@@ -39,7 +39,8 @@ exports.checkStudent=function(req,res){  //这里调用结点
     result = newNode.programOfMenuNode(stuInfoBase , inputString);
     data.content = '<div id="showinfo"></div>'+'<button id="addStudent">添加学生</button>' +
         '<button id="printStudentScore">生成成绩单</button>' +
-        '<button id="removeStudentScore">删除学生信息</button>';
+        '<button id="removeStudentScore">删除学生信息</button>' +
+        '<button id="reviseStudentScore">修改学生信息</button>';
     data.head='<script src="../jquery.min.js"></script><script src="../app/indexScript.js"></script>';
     data.showInfo = result.printInfo;
     res.send(data);
@@ -61,7 +62,8 @@ exports.checkNumber=function(req,res){
     result = newNode.programOfMenuNode(stuInfoBase , inputString);
     data.content = '<div id="showinfo"></div>'+'<button id="addStudent">添加学生</button>' +
         '<button id="printStudentScore">生成成绩单</button>' +
-        '<button id="removeStudentScore">删除学生信息</button>';
+        '<button id="removeStudentScore">删除学生信息</button>' +
+        '<button id="reviseStudentScore">修改学生信息</button>';
     data.showInfo = result.printInfo;
     res.send(data);
 }
@@ -73,22 +75,34 @@ exports.delStuInfo=function(req,res){
     // console.log(req);
     res.send(data);
 }
+
 exports.delStudent=function(req,res){
-    var newNode = node3;
-    var result;
     var inputString = req.query.content;
     var data={};
-    result = newNode.programOfMenuNode(stuInfoBase , inputString);
-    data.content = '<div id="showinfo"></div>'+'<button id="addStudent">添加学生</button>' +
-        '<button id="printStudentScore">生成成绩单</button>' +
-        '<button id="removeStudentScore">删除学生信息</button>';    // console.log(req);
+    var student = stuInfoBase.findStudent(inputString);
+    if(student === null){
+        data={content:'要删除的学生学号: <input type="text" id="stuNumber"><br/>' +
+        '<button id="Submit" disabled=true>删除</button>' +
+        `<div id="showinfo"></div>`};
+        data.showInfo = `未找到学号为${inputString}的学生信息，请重新输入`;
+        data.result = false;
+    }else{
+        var newNode = node3;
+        var returnPack = newNode.programOfMenuNode(stuInfoBase , inputString);
+        data.content = '<div id="showinfo"></div>'+'<button id="addStudent">添加学生</button>' +
+            '<button id="printStudentScore">生成成绩单</button>' +
+            '<button id="removeStudentScore">删除学生信息</button>' +
+            '<button id="reviseStudentScore">修改学生信息</button>';
+        data.showInfo = returnPack.printInfo;
+        data.result = true;
+    }
     res.send(data);
 }
 
 exports.findStudent=function(req,res){
     var newNode = node4;
-    var data={content:'要删除的学生学号: <input type="text" id="stuNumber"><br/>' +
-    '<button id="Submit" disabled=true>删除</button>' +
+    var data={content:'要修改的学生学号: <input type="text" id="stuNumber"><br/>' +
+    '<button id="Submit" disabled=true>查找</button>' +
     `<div id="showinfo">${newNode.printInfo.mainInterfaceMessage}</div>`};
     res.send(data);
 }
@@ -98,49 +112,37 @@ exports.newStuInfo=function(req,res){
     var inputString = req.query.content;
     var data={};
     var returnPack = newNode.programOfMenuNode(stuInfoBase , inputString);
+    var student = returnPack.student;
     if(returnPack.result === true){
-        returnPack.student.printFullInfo();
-        data.content = '<p>原始信息为：姓名|学号|民族|班级|数学|语文|英语|编程|</p>' +
-                '<p>更改信息为：</p>' +
-            '姓名: <input type="text" id="name"> 学号: <input type="text" id="number">' +
-            '民族: <input type="text" id="nation"> 班级: <input type="text" id="klass">' +
-            '数学: <input type="text" id="nation"> 语文: <input type="text" id="klass">' +
-            '英语: <input type="text" id="nation"> 编程: <input type="text" id="klass">' +
-            '<button id="addStudent"></button>'
-            '<div id="showinfo"></div>'+'<button id="addStudent">添加学生</button>' +
-            '<button id="printStudentScore">生成成绩单</button>' +
-            '<button id="removeStudentScore">删除学生信息</button>';    // console.log(req);
-        res.send(data);
+        data.content = '<p>更改信息为：<br></p>' +
+            `姓名: <input type="text" id="name" value=${student.name}> 学号: <input type="text" id="number" value=${student.number} disabled=true><br>` +
+            `民族: <input type="text" id="nation" value=${student.nation}> 班级: <input type="text" id="klass" value=${student.klass}><br>` +
+            `数学: <input type="text" id="math" value=${student.subjectScore.math}> 语文: <input type="text" id="chinese" value=${student.subjectScore.chinese}><br>` +
+            `英语: <input type="text" id="english"  value=${student.subjectScore.English}> 编程: <input type="text" id="programming"  value=${student.subjectScore.programming}><br>` +
+            '<button id="Submit">确认修改</button>';
+        data.result = true;
+    }else{
+        var data={content:'要修改的学生学号: <input type="text" id="stuNumber"><br/>' +
+        '<button id="Submit" disabled=true>查找</button>' +
+        `<div id="showinfo">${returnPack.printInfo}</div>`};
+        data.result = false;
     }
-
+    res.send(data);
 
 //这里由于还要分输入的学号是否存在的情况讨论，所以还是用模板比较好
-    var newNode = node4;
-    var data={content:'要删除的学生学号: <input type="text" id="stuNumber"><br/>' +
-    '<button id="Submit" disabled=true>删除</button>' +
-    `<div id="showinfo">${newNode.printInfo.mainInterfaceMessage}</div>`};
-    res.send(data);
 }
 
 exports.reviseStudent=function(req,res){
-    var newNode = node4;
-    var data={content:'要删除的学生学号: <input type="text" id="stuNumber"><br/>' +
-    '<button id="Submit" disabled=true>删除</button>' +
-    `<div id="showinfo">${newNode.printInfo.mainInterfaceMessage}</div>`};
-    res.send(data);
-
-    var newNode = node3;
-    var result;
     var inputString = req.query.content;
     var data={};
-    result = newNode.programOfMenuNode(stuInfoBase , inputString);
+    var returnPack = stuInfoBase.reviseStuInfo(inputString);
     data.content = '<div id="showinfo"></div>'+'<button id="addStudent">添加学生</button>' +
         '<button id="printStudentScore">生成成绩单</button>' +
-        '<button id="removeStudentScore">删除学生信息</button>';    // console.log(req);
+        '<button id="removeStudentScore">删除学生信息</button>' +
+        '<button id="reviseStudentScore">修改学生信息</button>';
+    data.showInfo = returnPack.printInfo;
     res.send(data);
 }
-
-
 
 exports.quit=function(req,res){
     res.render("quit",{title:"已退出"});
